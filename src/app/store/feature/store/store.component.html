@@ -6,3 +6,11 @@
     {{user.name.firstname}}
   </div>
 </ng-container>
+
+<hr>
+
+<ng-container *ngIf="categories$ | async as categories">
+  <div *ngFor="let category of categories" (click)="getProducts(category)">
+    {{category}}
+  </div>
+</ng-container>
