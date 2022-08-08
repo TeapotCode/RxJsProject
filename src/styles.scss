@@ -2,8 +2,12 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 
 .modal {
-  width: 80%;
+ max-width: 80%;
   display: flex;
   justify-content: center;
   align-content: center;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }

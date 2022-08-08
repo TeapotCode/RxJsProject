@@ -9,6 +9,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req.clone({setHeaders: {Authorization: this.token.getToken(), 'cache-control': 'max-age=300'}}))
+    return next.handle(req.clone({setHeaders: {Authorization: this.token.getToken()}}))
   }
 }

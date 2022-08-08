@@ -10,7 +10,8 @@
 <hr>
 
 <ng-container *ngIf="categories$ | async as categories">
-  <div *ngFor="let category of categories" (click)="getProducts(category)">
+  <div *ngFor="let category of categories" (click)="getProducts(category)" class="pill">
     {{category}}
   </div>
 </ng-container>
+

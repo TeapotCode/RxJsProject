@@ -1,4 +1,4 @@
-<ng-container *ngIf="products$ | async as products">
+<ng-container *ngIf="products$ | async as products; else loading">
   <div class="wrapper">
     <div *ngFor="let product of products" class="product">
       <img [src]="product.image" height="50px"/>
@@ -7,3 +7,6 @@
     </div>
   </div>
 </ng-container>
+
+
+<ng-template #loading>Loading...</ng-template>
