@@ -1,0 +1,9 @@
+<ng-container *ngIf="categories; else loading">
+  <div *ngFor="let category of categories" (click)="onSelect(category)" class="pill">
+    {{category}}
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  Loading categories...
+</ng-template>

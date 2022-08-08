@@ -1,11 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {ApiService} from "../../data-access/api.service";
-import {filter, fromEvent, map, Observable, take, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {User} from "../../utils/user.interface";
-import {Dialog} from "@angular/cdk/dialog";
-import {ProductComponent} from "../../ui/product/product.component";
-import {Product} from "../../utils/product.interface";
-import {Overlay, ScrollStrategyOptions} from "@angular/cdk/overlay";
+import {ProductsComponent} from "../../ui/products/products.component";
+import {Overlay} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {DOCUMENT} from "@angular/common";
 import {AuthService} from "../../data-access/auth.service";
@@ -13,7 +11,8 @@ import {AuthService} from "../../data-access/auth.service";
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.scss']
+  styleUrls: ['./store.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StoreComponent {
 
@@ -31,7 +30,7 @@ export class StoreComponent {
       panelClass: 'modal'
     })
 
-    let componentRef = overlayRef.attach(new ComponentPortal(ProductComponent))
+    let componentRef = overlayRef.attach(new ComponentPortal(ProductsComponent))
     componentRef.setInput('products', this.api.getInCategory(category))
 
     overlayRef.backdropClick().subscribe(() => {

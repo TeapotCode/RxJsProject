@@ -6,21 +6,13 @@
   </div>
 </ng-container>
 
-
 <hr>
+
 <ng-container *ngIf="isUserLogIn$ | async; else pleaseLogIn">
-
-  <ng-container *ngIf="categories$ | async as categories; else loading">
-    <div *ngFor="let category of categories" (click)="getProducts(category)" class="pill">
-      {{category}}
-    </div>
-  </ng-container>
-
-  <ng-template #loading>
-    Loading categories...
-  </ng-template>
+  <app-categories *ngIf="{categories: categories$ | async} as vm"
+                  [categories]="vm.categories"
+                  (selected)="getProducts($event)"></app-categories>
 </ng-container>
-
 
 <ng-template #pleaseLogIn>
   <button (click)="onLogin()">Login</button>

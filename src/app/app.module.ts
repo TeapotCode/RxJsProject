@@ -5,14 +5,16 @@ import {AppComponent} from './app.component';
 import {StoreComponent} from './store/feature/store/store.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./store/utils/token.interceptor";
-import { ProductComponent } from './store/ui/product/product.component';
+import { ProductsComponent } from './store/ui/products/products.component';
 import {DialogModule} from "@angular/cdk/dialog";
+import { CategoriesComponent } from './store/ui/categories/categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
-    ProductComponent
+    ProductsComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
