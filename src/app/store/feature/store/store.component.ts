@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ApiService} from "../../data-access/api.service";
-import {filter, fromEvent, Observable, take, tap} from "rxjs";
+import {filter, fromEvent, map, Observable, take, tap} from "rxjs";
 import {User} from "../../utils/user.interface";
 import {Dialog} from "@angular/cdk/dialog";
 import {ProductComponent} from "../../ui/product/product.component";
@@ -8,6 +8,7 @@ import {Product} from "../../utils/product.interface";
 import {Overlay, ScrollStrategyOptions} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {DOCUMENT} from "@angular/common";
+import {AuthService} from "../../data-access/auth.service";
 
 @Component({
   selector: 'app-store',
@@ -18,8 +19,9 @@ export class StoreComponent {
 
   users$: Observable<User[]> = this.api.getUsers()
   categories$: Observable<string[]> = this.api.getCategories()
+  isUserLogIn$: Observable<boolean> = this.auth.token.pipe(map(value => !!value));
 
-  constructor(private api: ApiService, private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
+  constructor(private api: ApiService, private overlay: Overlay, @Inject(DOCUMENT) private document: Document, private auth: AuthService) {
   }
 
   getProducts(category: string) {
@@ -39,6 +41,6 @@ export class StoreComponent {
   }
 
   onLogin() {
-    this.api.login("donero", "ewedon").subscribe()
+    this.auth.login("donero", "ewedon").subscribe()
   }
 }

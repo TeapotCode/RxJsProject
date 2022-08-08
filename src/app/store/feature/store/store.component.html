@@ -1,17 +1,29 @@
-<button (click)="onLogin()">Login</button>
-
-
 <ng-container *ngIf="users$ | async as users">
-  <div *ngFor="let user of users">
-    {{user.name.firstname}}
+  <div style="display: flex; gap: 10px">
+    <div *ngFor="let user of users">
+      {{user.name.firstname}}
+    </div>
   </div>
 </ng-container>
+
 
 <hr>
+<ng-container *ngIf="isUserLogIn$ | async; else pleaseLogIn">
 
-<ng-container *ngIf="categories$ | async as categories">
-  <div *ngFor="let category of categories" (click)="getProducts(category)" class="pill">
-    {{category}}
-  </div>
+  <ng-container *ngIf="categories$ | async as categories; else loading">
+    <div *ngFor="let category of categories" (click)="getProducts(category)" class="pill">
+      {{category}}
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    Loading categories...
+  </ng-template>
 </ng-container>
 
+
+<ng-template #pleaseLogIn>
+  <button (click)="onLogin()">Login</button>
+  <hr>
+  Please login to see categories
+</ng-template>
