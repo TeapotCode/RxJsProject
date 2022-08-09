@@ -4,6 +4,8 @@
   gap: 1rem;
   //margin: 5rem 0;
   padding: 5rem 0;
+  pointer-events: none;
+
 }
 
 .product {
@@ -11,8 +13,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  gap: 2rem;
   background-color: white;
   border-radius: 10px;
   color: black;
+  //margin-bottom: 1rem;
+  gap: 1rem;
 }

@@ -5,23 +5,24 @@ import {AppComponent} from './app.component';
 import {StoreComponent} from './store/feature/store/store.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./store/utils/token.interceptor";
-import { ProductsComponent } from './store/ui/products/products.component';
+import {ProductsComponent} from './store/ui/products/products.component';
 import {DEFAULT_DIALOG_CONFIG, DialogModule} from "@angular/cdk/dialog";
-import { CategoriesComponent } from './store/ui/categories/categories.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule} from "@angular/material/dialog";
+import {CategoriesComponent} from './store/ui/categories/categories.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
     ProductsComponent,
-    CategoriesComponent
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     DialogModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [
