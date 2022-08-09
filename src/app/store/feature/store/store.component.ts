@@ -25,7 +25,7 @@ export class StoreComponent {
   getProducts(category: string) {
     this.api.getInCategory(category)
       .pipe(
-        tap(response => this.dialog.open(ProductsComponent, {data: response})),
+        tap(response => this.dialog.open(ProductsComponent, {data: response, hasBackdrop: true, panelClass: 'modal'})),
         retryPopUp(this.injector),
         catchError(() => EMPTY)
       ).subscribe()
