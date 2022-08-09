@@ -1,12 +1,9 @@
-<ng-container *ngIf="products$ | async as products; else loading">
-  <div class="wrapper">
-    <div *ngFor="let product of products" class="product">
-      <img [src]="product.image" height="50px"/>
-      <h2>{{product.title}}</h2>
-      <h3>{{'$' + product.price}}</h3>
-    </div>
+<div class="wrapper">
+  <div *ngFor="let product of products" class="product">
+    <img [src]="product.image" height="50px"/>
+    <h2>{{product.title}}</h2>
+    <h3>{{'$' + product.price}}</h3>
   </div>
-</ng-container>
+</div>
 
 
-<ng-template #loading>Loading...</ng-template>

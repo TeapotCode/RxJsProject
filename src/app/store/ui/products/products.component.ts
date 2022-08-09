@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
 import {Product} from "../../utils/product.interface";
-import {Observable} from "rxjs";
+import {DIALOG_DATA} from "@angular/cdk/dialog";
 
 @Component({
   selector: 'app-products',
@@ -10,10 +10,9 @@ import {Observable} from "rxjs";
 })
 export class ProductsComponent {
 
-  @Input('products') products$: Observable<Product[]> | undefined;
+  @Input('products') products: Product[] = this.data;
 
-  constructor() {
+  constructor(@Inject(DIALOG_DATA) public data: Product[]) {
   }
-
 
 }

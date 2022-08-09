@@ -15,16 +15,19 @@ export class ApiService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiConfig.url + '/users')
-      .pipe(catchError(() => EMPTY))
+      .pipe(
+        catchError(() => EMPTY))
   }
 
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(this.apiConfig.url + "/products/categories")
-      .pipe(catchError(() => EMPTY))
+      .pipe(
+        catchError(() => EMPTY))
   }
 
   getInCategory(category: string) {
     return this.http.get<Product[]>(this.apiConfig.url + `/products/category/${category}`)
-      .pipe(catchError(() => EMPTY))
+      .pipe(
+        catchError(() => EMPTY))
   }
 }

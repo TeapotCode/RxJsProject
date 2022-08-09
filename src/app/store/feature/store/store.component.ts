@@ -1,12 +1,10 @@
-import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {ApiService} from "../../data-access/api.service";
-import {map, Observable} from "rxjs";
+import {map, Observable, switchMap, tap} from "rxjs";
 import {User} from "../../utils/user.interface";
 import {ProductsComponent} from "../../ui/products/products.component";
-import {Overlay} from "@angular/cdk/overlay";
-import {ComponentPortal} from "@angular/cdk/portal";
-import {DOCUMENT} from "@angular/common";
 import {AuthService} from "../../data-access/auth.service";
+import {Dialog} from "@angular/cdk/dialog";
 
 @Component({
   selector: 'app-store',
@@ -20,23 +18,14 @@ export class StoreComponent {
   categories$: Observable<string[]> = this.api.getCategories()
   isUserLogIn$: Observable<boolean> = this.auth.token.pipe(map(value => !!value));
 
-  constructor(private api: ApiService, private overlay: Overlay, @Inject(DOCUMENT) private document: Document, private auth: AuthService) {
+  constructor(private api: ApiService, private auth: AuthService, private dialog: Dialog) {
   }
 
   getProducts(category: string) {
-    let overlayRef = this.overlay.create({
-      positionStrategy: this.overlay.position().global().centerVertically().centerHorizontally(),
-      hasBackdrop: true,
-      panelClass: 'modal'
-    })
-
-    let componentRef = overlayRef.attach(new ComponentPortal(ProductsComponent))
-    componentRef.setInput('products', this.api.getInCategory(category))
-
-    overlayRef.backdropClick().subscribe(() => {
-      componentRef.destroy()
-      overlayRef.dispose()
-    })
+    this.api.getInCategory(category)
+      .pipe(
+        tap(response => this.dialog.open(ProductsComponent, {data: response}))
+      ).subscribe()
   }
 
   onLogin() {

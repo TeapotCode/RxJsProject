@@ -6,8 +6,10 @@ import {StoreComponent} from './store/feature/store/store.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./store/utils/token.interceptor";
 import { ProductsComponent } from './store/ui/products/products.component';
-import {DialogModule} from "@angular/cdk/dialog";
+import {DEFAULT_DIALOG_CONFIG, DialogModule} from "@angular/cdk/dialog";
 import { CategoriesComponent } from './store/ui/categories/categories.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { CategoriesComponent } from './store/ui/categories/categories.component'
   imports: [
     BrowserModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: DEFAULT_DIALOG_CONFIG, useValue: {hasBackdrop: true, panelClass: 'modal'}}
   ],
   bootstrap: [AppComponent]
 })
