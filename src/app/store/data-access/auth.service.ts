@@ -23,8 +23,6 @@ export class AuthService {
   login(username: string, password: string): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(this.apiConfig.url + "/auth/login", {username, password})
       .pipe(
-        tap(({token}) => this._token.next(token)),
-        catchError(() => EMPTY)
-      )
+        tap(({token}) => this._token.next(token)))
   }
 }

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Injector} from '@angular/core';
 import {ApiService} from "../../data-access/api.service";
-import {catchError, EMPTY, map, Observable, tap} from "rxjs";
+import {catchError, EMPTY, map, Observable, retry, retryWhen, tap} from "rxjs";
 import {User} from "../../utils/user.interface";
 import {ProductsComponent} from "../../ui/products/products.component";
 import {AuthService} from "../../data-access/auth.service";
@@ -26,12 +26,11 @@ export class StoreComponent {
     this.api.getInCategory(category)
       .pipe(
         tap(response => this.dialog.open(ProductsComponent, {data: response, hasBackdrop: true, panelClass: 'modal'})),
-        retryPopUp(this.injector),
         catchError(() => EMPTY)
       ).subscribe()
   }
 
   onLogin() {
-    this.auth.login("donero", "ewedon").subscribe()
+    this.auth.login("donero", "ewedon").pipe(catchError(() => EMPTY)).subscribe()
   }
 }
