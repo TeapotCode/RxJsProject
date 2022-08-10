@@ -10,6 +10,7 @@ import {DialogModule} from "@angular/cdk/dialog";
 import {CategoriesComponent} from './store/ui/categories/categories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {RetryInterceptor} from "./store/utils/retry.interceptor";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
