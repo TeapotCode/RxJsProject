@@ -1,11 +1,11 @@
 import {Injector} from '@angular/core';
-import {catchError, iif, pipe, retry, switchMap, throwError} from "rxjs";
+import {catchError, iif, Observable, pipe, retry, switchMap, throwError} from "rxjs";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 
-export function retryPopUp(injector: Injector, config?: MatSnackBarConfig) {
+export function retryPopUp<T>(injector: Injector, config?: MatSnackBarConfig) {
   return pipe(
-    catchError((err, caught) => {
+    catchError((err, caught: Observable<T>) => {
 
       const snackBar = injector.get(MatSnackBar)
       const snackBarRef = snackBar.open('Connection failure', 'Retry', {
