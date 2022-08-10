@@ -1,3 +1,4 @@
+<mat-spinner *ngIf="isLoading$ | async" class="spinner" diameter="100"></mat-spinner>
 <ng-container *ngIf="users$ | async as users">
   <div style="display: flex; gap: 10px">
     <div *ngFor="let user of users">
@@ -5,6 +6,7 @@
     </div>
   </div>
 </ng-container>
+
 
 <hr>
 

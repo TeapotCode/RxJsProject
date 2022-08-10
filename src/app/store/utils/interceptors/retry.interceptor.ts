@@ -1,7 +1,7 @@
 import {Injectable, Injector} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {catchError, EMPTY, Observable} from "rxjs";
-import {retryPopUp} from "./retry-pop-up";
+import {catchError, EMPTY, finalize, Observable, tap} from "rxjs";
+import {retryPopUp} from "../retry-pop-up";
 
 @Injectable()
 export class RetryInterceptor implements HttpInterceptor {
