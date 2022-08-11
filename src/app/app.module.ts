@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {StoreComponent} from './store/feature/store/store.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./store/utils/interceptors/token.interceptor";
 import {ProductsComponent} from './store/ui/products/products.component';
 import {DialogModule} from "@angular/cdk/dialog";
@@ -11,12 +11,14 @@ import {CategoriesComponent} from './store/ui/categories/categories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {RetryInterceptor} from "./store/utils/interceptors/retry.interceptor";
-import {LoadingInterceptor} from "./store/utils/interceptors/loading.interceptor";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {interceptorProvider} from "./store/utils/interceptors/interceptorProvider";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {PillComponent} from './store/ui/pill/pill.component';
+import { SearchComponent } from './store/feature/search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,22 +26,24 @@ import {MatInputModule} from "@angular/material/input";
     StoreComponent,
     ProductsComponent,
     CategoriesComponent,
+    PillComponent,
+    SearchComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    DialogModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        DialogModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        ReactiveFormsModule
+    ],
   providers: [
     interceptorProvider(TokenInterceptor),
     interceptorProvider(RetryInterceptor),
-    interceptorProvider(LoadingInterceptor),
   ],
   bootstrap: [AppComponent]
 })

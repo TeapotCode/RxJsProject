@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input [formControl]="input" matInput>
+  <mat-spinner *ngIf="isLoading$ |async" class="spinner" diameter="24"></mat-spinner>
+
+</mat-form-field>
+
+<div class="search-results" *ngIf="response$ | async as response">
+  <app-pill *ngFor="let product of response.products">
+    <h4>{{product.title}}</h4>
+    <p>{{product.description}}</p>
+  </app-pill>
+</div>
+

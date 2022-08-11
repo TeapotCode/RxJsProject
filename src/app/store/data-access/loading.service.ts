@@ -8,7 +8,7 @@ export class LoadingService {
 
   private isLoading$$ = new BehaviorSubject<boolean>(false);
 
-  isLoading$ = this.isLoading$$.pipe()
+  isLoading$ = this.isLoading$$.asObservable()
 
   setLoading() {
     this.isLoading$$.next(true)
@@ -21,4 +21,5 @@ export class LoadingService {
   get isLoading() {
     return this.isLoading$$.value
   }
+
 }

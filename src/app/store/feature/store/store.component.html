@@ -1,4 +1,3 @@
-<mat-spinner *ngIf="isLoading$ | async" class="spinner" diameter="100"></mat-spinner>
 <ng-container *ngIf="users$ | async as users">
   <div style="display: flex; gap: 10px">
     <div *ngFor="let user of users">
@@ -9,6 +8,8 @@
 
 
 <hr>
+
+<mat-spinner *ngIf="(isLoading$ | async)" class="spinner" diameter="100"></mat-spinner>
 
 <ng-container *ngIf="isUserLogIn$ | async; else pleaseLogIn">
   <app-categories *ngIf="{categories: categories$ | async} as vm"
@@ -24,7 +25,4 @@
 
 <hr>
 
-<mat-form-field>
-  <mat-label>Search</mat-label>
-  <input #input matInput>
-</mat-form-field>
+<app-search></app-search>

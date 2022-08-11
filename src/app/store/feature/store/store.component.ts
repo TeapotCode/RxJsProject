@@ -1,12 +1,10 @@
-import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Renderer2, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Injector} from '@angular/core';
 import {ApiService} from "../../data-access/api.service";
-import {map, Observable, tap} from "rxjs";
+import {delay, map, Observable, Subject, tap} from "rxjs";
 import {User} from "../../utils/user.interface";
 import {ProductsComponent} from "../../ui/products/products.component";
 import {AuthService} from "../../data-access/auth.service";
 import {Dialog} from "@angular/cdk/dialog";
-import {LoadingService} from "../../data-access/loading.service";
-import {Element} from "@angular/compiler";
 
 @Component({
   selector: 'app-store',
@@ -20,24 +18,28 @@ export class StoreComponent {
   categories$: Observable<string[]> = this.api.getCategories()
   isUserLogIn$: Observable<boolean> = this.auth.token.pipe(map(value => !!value));
 
-  isLoading$ = this.loading.isLoading$;
+  isLoading$ = new Subject<boolean>();
 
-  constructor(private api: ApiService, private auth: AuthService, private dialog: Dialog, private loading: LoadingService) {
-    this.api.searchProducts('phone').subscribe()
+  constructor(private api: ApiService, private auth: AuthService, private dialog: Dialog, private injector: Injector) {
   }
 
   getProducts(category: string) {
+    this.isLoading$.next(true)
+
     this.api.getInCategory(category)
       .pipe(
-        tap(response => this.dialog.open(ProductsComponent, {data: response, hasBackdrop: true, panelClass: 'modal'}))
+        delay(0),
+        tap({
+          next: response => {
+            this.dialog.open(ProductsComponent, {data: response, hasBackdrop: true, panelClass: 'modal'})
+          },
+          error: () => this.isLoading$.next(false),
+          complete: () => this.isLoading$.next(false)
+        })
       ).subscribe()
   }
 
   onLogin() {
     this.auth.login("donero", "ewedon").subscribe()
   }
-
-  @ViewChild('input', {static: true}) inputRef!: ElementRef<HTMLInputElement>;
-
-  searchResponse = this.inputRef
 }
