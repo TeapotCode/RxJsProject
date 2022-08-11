@@ -9,7 +9,7 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(req.clone()).pipe(tap(() => this.loading.setLoading()), finalize(() => this.loading.setLoaded()))
+    return next.handle(req).pipe(tap(() => this.loading.setLoading()), finalize(() => this.loading.setLoaded()))
   }
 
 }
