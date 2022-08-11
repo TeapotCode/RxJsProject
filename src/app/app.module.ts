@@ -10,7 +10,6 @@ import {DialogModule} from "@angular/cdk/dialog";
 import {CategoriesComponent} from './store/ui/categories/categories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {RetryInterceptor} from "./store/utils/interceptors/retry.interceptor";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {interceptorProvider} from "./store/utils/interceptors/interceptorProvider";
@@ -18,7 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PillComponent} from './store/ui/pill/pill.component';
-import { SearchComponent } from './store/feature/search/search.component';
+import {SearchComponent} from './store/feature/search/search.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,6 @@ import { SearchComponent } from './store/feature/search/search.component';
     ],
   providers: [
     interceptorProvider(TokenInterceptor),
-    interceptorProvider(RetryInterceptor),
   ],
   bootstrap: [AppComponent]
 })
