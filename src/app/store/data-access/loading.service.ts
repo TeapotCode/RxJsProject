@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class LoadingService {
 
-  private isLoading$$ = new BehaviorSubject<boolean>(true);
+  private isLoading$$ = new BehaviorSubject<boolean>(false);
 
   isLoading$ = this.isLoading$$.pipe()
 

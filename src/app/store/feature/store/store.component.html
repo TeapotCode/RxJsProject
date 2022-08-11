@@ -17,7 +17,14 @@
 </ng-container>
 
 <ng-template #pleaseLogIn>
-  <button (click)="onLogin()">Login</button>
+  <button mat-button color="primary" (click)="onLogin()">Login</button>
   <hr>
   Please login to see categories
 </ng-template>
+
+<hr>
+
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input #input matInput>
+</mat-form-field>

@@ -15,6 +15,8 @@ import {LoadingInterceptor} from "./store/utils/interceptors/loading.interceptor
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {interceptorProvider} from "./store/utils/interceptors/interceptorProvider";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import {interceptorProvider} from "./store/utils/interceptors/interceptorProvide
     DialogModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatButtonModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatInputModule
   ],
   providers: [
     interceptorProvider(TokenInterceptor),
